@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- DW6 -->
+<head>
+<!-- Copyright 2005 Macromedia, Inc. All rights reserved. -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>BookDB</title>
+<link rel="stylesheet" href="/static/css/tutor.css" type="text/css" />
+</head>
+<!-- The structure of this file is exactly the same as 2col_rightNav.html;
+     the only difference between the two is the stylesheet they use -->
+<body>
+<div id="index_head">
+  <h1>图书馆数据库</h1>
+    <div style="font-size:120%;"><a href="/add" style='text-decoration:none'>添加</a> | <a href="/" style='text-decoration:none'>浏览</a> | <a href="/search" style='text-decoration:none'>查找作者</a></div>
+  <h2>书籍信息</h2>
+</div>
+<br />
+<!-- end masthead -->
+<div id="list">
+	 <form method="post">
+		<table width="1200" border="1">
+		  <tr><td>Info for book</td></tr>
+		  <tr>
+			<td width="200">Title</td>
+			<td width="150">Isbn</td>
+			<td width="200">Publisher</td>
+			<td width="150">PublishDate</td>
+			<td width="100">Price</td>
+		  </tr>
+		  <tr>
+			<td><input name="title" type="text"></td>
+			<td><input name="isbn" type="text"></td>
+			<td><input name="publisher" type="text"></td>
+            <td><input name="publishdate" type="text" value="2015-10-27 00:00:00"></td>
+			<td><input name="price" type="text"></td>
+		  </tr>
+		  <tr><td>Info for authorid</td></tr>
+		  <tr>
+		  	<td>Name</td>
+			<td>AuthorID</td>
+		  	<td>Age</td>
+		  	<td>Country</td>
+		  </tr>
+		  <tr>
+			<td><input name="name" type="text"></td>
+			<td><input name="authorid" type="text"></td>
+			<td><input name="age" type="text"></td>
+			<td><input name="country" type="text"></td>
+			<td><input type="submit" value="Add"> <input type="reset" value="Reset"></td>
+		  </tr>
+		</table>
+	</form>
+    <div style="font-style:italic;"><small>注：库中已有的作者ID或书的唯一ID号，将会更新对应的ID号作者信息或书籍信息!DateFormate: Y-M-D H:M:S</small></div>
+</div>
+<div id="bottom"> <img src="/static/images/kao_bottom.jpg" width="36" height="18" /> <a href="/aboutme" style='text-decoration:none'>About Me</a>| <a href="/contactme" style='text-decoration:none'>Contact Me</a> | &copy;2015 Lee</div>
+</body>
+</html>

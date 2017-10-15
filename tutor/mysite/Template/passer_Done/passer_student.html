@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HFL家教服务系统</title>
+<link rel="stylesheet" href="/static/css/first.css" type="text/css" />
+</head>
+<body>
+<div id="masthead" style="background: url('/static/images/kao_top.jpg');">
+  <h1>工大家教服务系统</h1>
+  <div id="utility"> <a href="/login">登陆</a> | <a href="/getpassword">忘记密码</a> | <a href="/register">用户注册</a> 
+</div>
+ <div id="globalNav"><a href='/' style="font-size:120%;"><b>学生</b></a> | <a href="/passer_teacher">教员</a></div>
+<h2>老师信息</h2>
+<div id="table">
+    <table border="1">
+      <tr>
+        <td style='width:100px;'>姓 名</td>
+        <td style='width:100px;'>性 别</td>
+        <td style='width:150px;'>毕业大学</td>
+        <td style='width:150px;'>文/理科</td>
+        <td style='width:150px;'>期望薪酬</td>
+		<td style='width:150px;'>发布日期</td>
+      </tr>
+	  {% for teacher in teachers_list %}
+		{% for content in teacher.content.all %}
+		{% if content.freestate == False %}
+		<tr>
+			<td>{{ teacher.name }}</td>
+			<td>
+			{% if teacher.sex %}
+				男</td>
+			{% else %}
+				女</td>
+			{% endif %}
+			<td>{{ teacher.college }}</td>
+			<td>
+			{% if content.wenli == True %}
+			理科
+			{% else %}
+			文科
+			{% endif %}
+			</td>
+			<td>
+			{% if content.getperhour == 1 %}
+			20~29
+			{% elif content.getperhour == 2 %}
+			30~39
+			{% elif content.getperhour == 3 %}
+			40~49
+			{% elif content.getperhour == 4 %}
+			50~100
+			{% else %}
+			100~
+			{% endif %}
+			</td>
+			<td>{{ content.publishdate }}</td>
+			<td><a href="/login" style='text-decoration:none;font-size:small;'>我要预约</a></td>
+		</tr>
+		{% endif %}
+		{% endfor %}
+	  {% endfor %}
+    </table>
+</div>
+<br />
+<div id="bottom"> <img src="/static/images/kao_bottom.jpg" width="44" height="22" /> <a href="/AboutUs">About Us</a> | <a href="/ContactUs">Contact Us</a> | &copy;2015 HuangFengLee </div>
+</body>
+</html>

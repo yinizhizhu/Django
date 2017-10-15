@@ -1,0 +1,180 @@
+body{
+	font-family: Arial,sans-serif;
+	color: #333333;
+	line-height: 1.166;	
+	margin: 0px;
+	padding: 0px;
+}
+
+a:link, a:visited, a:hover {
+	color: #006699;
+	text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+h1{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 120%;
+ color: #334d55;
+}
+
+h2{
+	font-family: PingFang SC,Verdana,Helvetica Neue,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+	 font-size: 114%;
+	 color: #006699;
+}
+
+h3{
+	font-family:PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans;
+	 font-size: 100%;
+	 color: #334d55;
+}
+
+h4{
+ font-size: 100%;
+ font-weight: normal;
+ color: #333333;
+}
+
+h5{
+ font-size: 100%;
+ color: #334d55;
+}
+
+#masthead{
+	position:fixed;
+	top: 0;
+	padding: 0px 0px 2px 0px;
+	border-bottom: 1px solid #cccccc;
+	background-repeat: no-repeat;
+	height: 160px;
+	width: 100%;
+	z-index: 999;
+}
+
+#masthead h1{
+	margin-top: 24px;
+	margin-left: 15px;
+	font-size: 200%;
+}
+
+#masthead div{
+	margin-top: 75px;
+}
+
+#globalNav{
+	color: #d2b48c;
+	padding: 0px 0px 0px 10px;
+	white-space: nowrap;
+	margin-left:auto;
+	margin-right:9px;
+	width:90px;
+}
+
+#globalNav img{
+	display: block;
+}
+
+#globalNav a {
+	color: #d2b48c;
+	font-size: 100%;
+	padding: 0px 4px 0px 0px; 
+}
+
+#navBar{
+	position: fixed;
+	top: 86px;
+	left: 0;
+	background-color: #eeeeee;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+#navBar a{
+	font-size: 120%;
+	padding: 3px 4px 0px 0px; 
+}
+
+#navBar form{
+	font-family: "¿¬Ìå";
+	font-size:80%;
+	padding: 0px 4px 0px 12px;
+}
+
+#navBar select{
+	font-family: "¿¬Ìå";
+	font-size:100%;
+}
+
+.relatedLinks{
+	margin: 0px;
+	padding: 0px 0px 0px 3px;
+	border-bottom: 1px solid #cccccc;
+	font-size: 90%;
+}
+
+.relatedLinks h3{
+	padding: 0px 0px 0px 0px;
+}
+
+#content{
+	font-family: PingFang SC,Verdana,Helvetica Neue,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+	color: #f4a460;
+	margin-top: 170px;
+	margin-left: 270px;
+    float:left;
+	padding: 0 3% 0 0;
+}
+
+#content h2{
+	font-size: 100%;
+	text-align: left;
+	padding: 0px 4px 0px 0px; 
+}
+
+#content a{
+	font-size: 90%;
+	padding: 0px 4px 0px 0px; 
+}
+
+#content table{
+	border:0px none;
+}
+
+#siteName{
+	margin: 0px;
+	padding: 0px 0px 10px 10px;
+}
+
+#siteInfo{
+	clear: both;
+	font-size: 75%;
+	color: #cccccc;
+	padding: 0px 0px 0px 0px;
+	text-align: center;
+}
+
+#siteInfo img{
+	padding: 0px 0px 0px 0px;
+	vertical-align: middle;
+}
+
+#navBar{
+	margin-top: 80px;
+}
+
+#advert{
+	padding: 3px 0px 0px 1px;
+	font-size: 80%;
+	border-top: 1px solid #cccccc;
+}
+
+#advert img{
+	display: block;
+}

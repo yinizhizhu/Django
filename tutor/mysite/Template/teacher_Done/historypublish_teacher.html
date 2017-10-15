@@ -1,0 +1,253 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<title>HFL家教系统</title>
+<link rel="stylesheet" href="/static/css/emx_nav_left.css" type="text/css" />
+</head>
+<body onmousemove="closesubnav(event);">
+{% load myfilter %}
+{% include "header_teacher.html" %}
+<div id="pagecell1">
+  <img alt="" src="/static/images/tl_curve_white.gif" height="6" width="6" id="tl" /> <img alt="" src="/static/images/tr_curve_white.gif" height="6" width="6" id="tr" />
+  <div id="pageName">
+    <h2 style="font-size:x-large;">历史发布信息</h2>
+  </div>
+  <div id="pageNav">
+    <div id="sectionLinks">
+	<a href="/lookthrough_teacher"><small>学 生</small>浏览</a>
+	<a href="/newpublish_teacher"><small>教 师</small>发布</a>
+	<a href="/historypublish_teacher" style="color:black;">历史发 布</a>
+	<a href="/historyget_teacher">历史<small>家 教</small></a>
+	<a href="/praise_teacher"><small>已 获</small>评价</a>
+	<a href="/info_teacher">教师<small>信 息</small></a>
+	<a href="/search_teacher"><small>匹 配</small>查找</a>
+	</div>
+    <div id="advert" style='text-align:center;'> <img src="/static/images/adver.jpg" alt="" width="178" height="120" /><small><I>Tel: 0450-0000-0000</I></small></div>
+  </div>
+  <div id="content">
+    <div class="list">
+	<form>
+		<table class='table table-bordered'>
+		<tr>
+			<td style="width:129px;">姓名</td><td style="width:210px;">{{teacher.name}}</td>
+		</tr>
+		<tr>
+			<td>性别</td>
+		{% if teacher.sex %}
+			<td>男</td>
+		{% else %}
+			<td>女></td>
+		{% endif %}
+		</tr>
+		<tr>
+			<td>毕业（在读）大学</td><td>{{ teacher.college }}</td>
+		</tr>
+		<tr>
+			<td>主修专业</td><td>{{ teacher.major }}</td>
+		</tr>
+		<tr>
+			<td>联系电话</td><td>{{ teacher.tel }}</td>
+		</tr>
+		<tr>
+			<td>联系地址</td><td>{{ teacher.address }}</td>
+		</tr>
+		<tr>
+			<td>邮箱</td><td>{{ teacher.email }}</td>
+		</tr>
+		<tr>
+			<td>身份证正面照</td><td><input type="file" name = "picfile" value={{teacher.image}}></td>
+		</tr>
+		{% for part in teacher.content.all %}
+		<tr style='background-color:gray;'><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td style='text-align:center;'>序号:{{ forloop.counter }}{{ item }}</td></tr>
+		<tr>
+			<td>发布时间</td><td>{{ part.publishdate }}</td>
+		</tr>
+		{% if part.wenli %}
+		<tr>
+		<td>方向</td><td style='font-size:small;'><h4>
+		理科</td>
+		</tr>
+		<tr style='font-size:small;'>
+			<td style='font-size:medium;'>主讲科目</td>
+			<td>{% include "subject_like_teacher.html" %}</td>
+		</tr>
+		{% else %}
+		<tr>
+		<td>方向</td><td style='font-size:small;'><h4>文科</td>
+		</tr>
+		<tr style='font-size:small;'>
+			<td style='font-size:medium;'>主讲科目</td>
+			<td>{% include "subject_wenke_teacher.html" %}</td>
+		</tr>
+		{% endif %}
+		<tr style='font-size:small;'>
+			<td style='font-size:medium;'>上课时间</td>
+			<td><h4>周一：
+		{% if part.timeforteaching|get:0 == '1' %}
+			上午<input type="checkbox" name="day1_mor" value="True"  checked='checked'/>
+		{% else %}
+			上午<input type="checkbox" name="day1_mor" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:2 == '1' %}
+			下午 <input type="checkbox" name="day1_aft" value="True"  checked='checked'/>	
+		{% else %}
+			下午 <input type="checkbox" name="day1_aft" value="False" />	
+		{% endif %}
+		{% if part.timeforteaching|get:4 == '1' %}
+			晚上 <input type="checkbox" name="day1_nig" value="True"  checked='checked'/>
+		{% else %}
+			晚上 <input type="checkbox" name="day1_nig" value="False" />
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周二：
+		{% if part.timeforteaching|get:6 == '1' %}
+			上午<input type="checkbox" name="day2_mor" value="True"  checked='checked'/>
+		{% else %}
+			上午<input type="checkbox" name="day2_mor" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:8 == '1' %}
+			下午 <input type="checkbox" name="day2_aft" value="True"  checked='checked'/>	
+		{% else %}
+			下午 <input type="checkbox" name="day2_aft" value="False" />	
+		{% endif %}
+		{% if part.timeforteaching|get:10 == '1' %}
+			晚上 <input type="checkbox" name="day2_nig" value="True"  checked='checked'/>
+		{% else %}
+			晚上 <input type="checkbox" name="day2_nig" value="False" />
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周三：
+		{% if part.timeforteaching|get:12 == '1' %}
+			上午<input type="checkbox" name="day3_mor" value="True"  checked='checked'/>
+		{% else %}
+			上午<input type="checkbox" name="day3_mor" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:14 == '1' %}
+			下午 <input type="checkbox" name="day3_aft" value="True"  checked='checked'/>
+		{% else %}
+			下午 <input type="checkbox" name="day3_aft" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:16 == '1' %}
+			晚上 <input type="checkbox" name="day3_nig" value="True"  checked='checked'/>
+		{% else %}
+			晚上 <input type="checkbox" name="day3_nig" value="False" />
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周四：
+		{% if part.timeforteaching|get:18 == '1' %}
+			上午<input type="checkbox" name="day4_mor" value="True"  checked='checked'/>
+		{% else %}
+			上午<input type="checkbox" name="day4_mor" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:20 == '1' %}
+			下午 <input type="checkbox" name="day4_aft" value="True"  checked='checked'/>	
+		{% else %}
+			下午 <input type="checkbox" name="day4_aft" value="False" />	
+		{% endif %}
+		{% if part.timeforteaching|get:22 == '1' %}
+			晚上 <input type="checkbox" name="day4_nig" value="True"  checked='checked'/>
+		{% else %}
+			晚上 <input type="checkbox" name="day4_nig" value="False" />
+		{% endif %}
+			</h4>
+			</td>
+		</tr>
+		<tr style='font-size:small;'>
+			<td>&nbsp;</td>
+			<td><h4>周五：
+		{% if part.timeforteaching|get:24 == '1' %}
+			上午<input type="checkbox" name="day5_mor" value="True"  checked='checked'/>
+		{% else %}
+			上午<input type="checkbox" name="day5_mor" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:26 == '1' %}
+			下午 <input type="checkbox" name="day5_aft" value="True"  checked='checked'/>	
+		{% else %}
+			下午 <input type="checkbox" name="day5_aft" value="False" />	
+		{% endif %}
+		{% if part.timeforteaching|get:28 == '1' %}
+			晚上 <input type="checkbox" name="day5_nig" value="True"  checked='checked'/>
+		{% else %}
+			晚上 <input type="checkbox" name="day5_nig" value="False" />
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周六：
+		{% if part.timeforteaching|get:30 == '1' %}
+			上午<input type="checkbox" name="day6_mor" value="True"  checked='checked'/>
+		{% else %}
+			上午<input type="checkbox" name="day6_mor" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:32 == '1' %}
+			下午 <input type="checkbox" name="day6_aft" value="True"  checked='checked'/>	
+		{% else %}
+			下午 <input type="checkbox" name="day6_aft" value="False" />	
+		{% endif %}
+		{% if part.timeforteaching|get:34 == '1' %}
+			晚上 <input type="checkbox" name="day6_nig" value="True"  checked='checked'/>
+		{% else %}
+			晚上 <input type="checkbox" name="day6_nig" value="False" />
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周日：
+		{% if part.timeforteaching|get:36 == '1' %}
+			上午<input type="checkbox" name="day7_mor" value="True"  checked='checked'/>
+		{% else %}
+			上午<input type="checkbox" name="day7_mor" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:38 == '1' %}
+			下午 <input type="checkbox" name="day7_aft" value="True"  checked='checked'/>
+		{% else %}
+			下午 <input type="checkbox" name="day7_aft" value="False" />
+		{% endif %}
+		{% if part.timeforteaching|get:40 == '1' %}
+			晚上 <input type="checkbox" name="day7_nig" value="True"  checked='checked'/>
+		{% else %}
+			晚上 <input type="checkbox" name="day7_nig" value="False" />
+		{% endif %}
+			</h4>
+			</td>
+		</tr>
+		<tr>
+			<td>期望薪酬<small>（每小时）</small></td><td><h4>
+			{% if part.getperhour == 1 %}
+			20~29
+			{% elif part.getperhour == 2 %}
+			30~39
+			{% elif part.getperhour == 3 %}
+			40~49
+			{% elif part.getperhour == 4 %}
+			50~100
+			{% else %}
+			100~
+			{% endif %}</h4></td>
+			<td style='color:blue;'>
+			{% if part.freestate == False %}
+				<a href='/delete/?part_id={{part.id}}'>删除</a>
+			{% else %}
+				<b>已被接单</b>
+			{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+		</table>
+	</form>
+    </div>
+  </div>
+  <div id="siteInfo"><img src="/static/images/kao_bottom.jpg" width="44" height="22" /> <a href="/AboutUs">About Us</a> | <a href="/ContactUs">Contact Us</a> | &copy;2015 HuangFengLee </div>
+</div>
+<br />
+</body>
+</html>

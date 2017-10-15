@@ -1,0 +1,97 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<title>yinizhizhu | PythonRE</title>
+ <meta charset='utf-8'>
+<link rel="stylesheet" href="/static/css/github.css">
+<link rel="stylesheet" href="/static/css/post.css">
+</head>
+<body>
+
+<div class="wrapper">
+<div class="header">
+	<span class="blog-name">yinizhizhu</span>
+
+<a class="nav" href="/">Home</a>
+<a class="nav" href="/About">About</a>
+</div>
+<div class="content">
+
+<h1>Python：文件操作</h1>
+
+<p>Python的文件操作较为简单，但是容易忘掉，然后自己就得去查询。</p>
+
+<p>然而，有时查到的还并不是自己需要的，这样一来就会比较耗时。所以，自己决定写一个备忘再此，需要时回来看看即可。</p>
+
+<p>详细介绍在这里：<a href='http://www.cnblogs.com/rollenholt/archive/2012/04/23/2466179.html' style='decoration:none;color:rgba(51, 132, 254, 1);'>PythonFile</a></p>
+
+<p>对于Python的文件操作，我们主要是了解它的：1.<a href='#jump_1' style='decoration:none;color:black;'><b>文件操作模式</b></a>、2.<a href='#jump_2' style='decoration:none;color:black;'><b>常用方法</b></a>、3.<a href='#jump_3' style='decoration:none;color:black;'><b>文件夹的创建</b></a>
+
+<p id='jump_1'><big>（一）文件操作模式</big></p>
+
+<pre><code class="language-objective-c">r 						<I>以读方式打开</I>
+w 						<I>以写方式打开（如果文件已存在，将清空）</I>
+a 						<I>以追加模式打开</I>
+r+ 						<I>以读写模式打开</I>
+w+ 						<I>以读写模式打开</I>
+a+ 						<I>以读写模式打开</I>
+b 						<I>以二进制模式打开</I>
+</code></pre>
+
+<p>除了以上的部分，当然还有其它的。举个栗子：wb、ab、rb+、wb+和ab+等，这些都可以由上述的模式描述推测到用途。这些需要时在去查询即可。</p>
+
+<pre><code class="language-objective-c">
+f = open('test.txt', 'r')
+f.close()
+</code></pre>
+
+<p id='jump_2'><big>（二）文件操作常用方法</big></p>
+
+<pre><code class="language-objective-c">f.close()					<I>关闭文件</I>
+f.readline()				<I>读取一行</I>
+f.readlines()				<I>读取整个文件，并返回各行的数据列表</I>
+f.write(string)				<I>输入string</I>
+</code></pre>
+
+<p>除了以上方法，还有f.fileno()、f.flush()、f.isatty()、f.read([count])、f.seek(offset[, where])、f.tell()、f.truncate([size])等等。</p>
+
+<p>向文件输入数据也可以通过重定向来实现：</p>
+
+<pre><code class="language-objective-c">>>>f = open('test.txt', 'w')
+>>>print >> f, 'Cause we are the champion, no time for loser!\nWe are the one, we are the children!'
+>>>f.close()
+>>>f = open('test.txt', 'r')
+>>>for line in f.readlines():
+	   print line
+Cause we are the champion, no time for loser!
+We are the one, we are the children!
+>>>f.close()
+</code></pre>
+
+<p id='jump_3'><big>（三）文件夹的创建</big></p>
+
+<p>许多时候，我们的创建文件较多，需要分类。那么，以文件夹进行区分是再直接不过的方式了</p>
+
+<pre><code class="language-objective-c">import os
+now_time_ms = datetime.datetime.now()       #the current time
+now_tims_d = now_time_ms.strftime("%Y-%m-%d")    #the date of today:yyyy-mm-dd
+if not os.path.exists(now_tims_d):      #create the file of today
+    os.mkdir(now_tims_d)
+if not os.path.exists(now_tims_d+"/url"):
+    os.mkdir(now_tims_d+"/url")
+if not os.path.exists(now_tims_d+"/ProductData"):
+    os.mkdir(now_tims_d+"/ProductData")
+</code></pre>
+
+<p>以上是我写爬虫时用到的文件夹操作，以时间命名文件夹。</p>
+
+<p>参考资料：</p>
+<ul style='color:rgba(51, 132, 254, 1);'>
+<li><a href="http://redth.codes/ios7-full-screen-layout/">http://redth.codes/ios7-full-screen-layout/</a></li>
+</ul>
+
+</div>
+</div>
+</body>
+
+</html>

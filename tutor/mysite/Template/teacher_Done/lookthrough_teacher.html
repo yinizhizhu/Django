@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<title>HFL家教系统</title>
+<link rel="stylesheet" href="/static/css/emx_nav_left.css" type="text/css" />
+</head>
+<body onmousemove="closesubnav(event);">
+{% load myfilter %}
+{% include "header_teacher.html" %}
+<div id="pagecell1">
+  <img alt="" src="/static/images/tl_curve_white.gif" height="6" width="6" id="tl" /> <img alt="" src="/static/images/tr_curve_white.gif" height="6" width="6" id="tr" />
+  <div id="pageName">
+    <h2 style="font-size:x-large;">学生信息浏览</h2>
+  </div>
+  <div id="pageNav">
+    <div id="sectionLinks">
+	<a href="/lookthrough_teacher" style="color:black;">学 生浏览</a>
+	<a href="/newpublish_teacher"><small>教 师</small>发布</a>
+	<a href="/historypublish_teacher">历史<small>发 布</small></a>
+	<a href="/historyget_teacher">历史<small>家 教</small></a>
+	<a href="/praise_teacher"><small>已 获</small>评价</a>
+	<a href="/info_teacher">教师<small>信 息</small></a>
+	<a href="/search_teacher"><small>匹 配</small>查找</a>
+	</div>
+    <div id="advert" style='text-align:center;'> <img src="/static/images/adver.jpg" alt="" width="178" height="120" /><small><I>Tel: 0450-0000-0000</I></small></div>
+  </div>
+  <div id="content">
+    <div class="list">
+	<form>
+		<table class='table table-bordered'>
+		<tr>
+			<td>姓名</td>
+			<td>性别</td>
+			<td>在读年级</td>
+			<td>文/理</td>
+			<td>需补科目</td>
+			<td>提供薪酬</td>
+			<td>老师要求</td>
+		</tr>
+		{% for student in students_list %}
+			{% for content in student.content.all %}
+			{% if content.freestate == False %}
+				<tr>
+				<td><a href='/lookone_teacher/?student_id={{student.id}}&content_id={{content.id}}'>{{ student.name }}</a></td>
+				{% if student.sex == True %}
+				<td>男</td>
+				{% else %}
+				<td>女</td>
+				{% endif %}
+				<td>{{ content.grade }}</td>
+				{% if content.wenli == True %}
+				<td>理科</td>
+				<td>{% include "subject_like_teacher.html" %}</td>
+				{% else %}
+				<td>文科</td>
+				<td>{% include "subject_wenke_teacher.html" %}</td>
+				{% endif %}
+				<td>
+				{% if content.costperhour == 1%}
+				20~29
+				{% elif content.costperhour == 2%}
+				30~39
+				{% elif content.costperhour == 3%}
+				40~49
+				{% elif content.costperhour == 4%}
+				50~100
+				{% else %}
+				100~
+				{% endif %}
+				</td>
+				<td>
+				{% if content.sexrequest == 1 %}
+					男
+				{% elif content.sexrequest == 2 %}
+					女
+				{% else %}
+					男、女均可
+				{% endif %}
+				</td>
+				</tr>
+			{% endif %}
+			{% endfor %}
+		{% endfor %}
+		</table>
+	</form>
+    </div>
+  </div>
+  <div id="siteInfo"><img src="/static/images/kao_bottom.jpg" width="44" height="22" /> <a href="/AboutUs">About Us</a> | <a href="/ContactUs">Contact Us</a> | &copy;2015 HuangFengLee </div>
+</div>
+<br />
+</body>
+</html>

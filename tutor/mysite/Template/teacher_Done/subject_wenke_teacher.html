@@ -1,0 +1,19 @@
+{% load myfilter %}
+{% if content.subjects|get:0 == '1' %}
+	语、
+{% endif %}
+{% if content.subjects|get:2 == '1' %}
+	数、
+{% endif %}
+{% if content.subjects|get:4 == '1' %}
+	英、
+{% endif %}
+{% if content.subjects|get:12 == '1' %}
+	政、
+{% endif %}
+{% if content.subjects|get:14 == '1' %}
+	史、
+{% endif %}
+{% if content.subjects|get:16 == '1' %}
+	地、
+{% endif %}

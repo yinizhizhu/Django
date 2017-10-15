@@ -1,0 +1,38 @@
+body{
+	font-family: "ºÚÌå";
+	color: #333333;
+	line-height: 1;	
+	background:url(/static/images/kao_top.gif) 0 0 no-repeat scroll transparent;
+	background-size:cover;
+	text-align:center;
+	z-index:9;
+}
+
+#index_head{
+	top: 0;
+    color: #708090;
+	padding: 0px 0px 0px 0px;
+	background-size:cover;
+	border-bottom: 1px solid #cccccc;
+	height: 150px;
+	width: 100%;
+	z-index:999;
+}
+
+
+#list{
+	padding-top: 5px;
+	margin:0 auto;
+	width:1200px;
+	z-index:99;
+}
+
+#bottom{
+	padding: 0px 480px 10px 480px;
+	background-color: white;
+	position:fixed;
+	font-size:100%;
+	color:green;
+	bottom: 1px;
+	z-index:999;
+}

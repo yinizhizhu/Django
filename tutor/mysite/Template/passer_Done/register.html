@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/static/css/first.css" type="text/css" />
+<title>HFL家教服务系统</title>
+<script type="text/javascript">
+	function check_password()
+	{
+	var first = document.getElementById('first').value;
+	var second = document.getElementById('second').value;
+	if (first != second)
+	{
+		alert("两次输入的密码不一致！");
+		return 0;
+	}
+	alert("恭喜！注册成功！");
+	return 0;
+	}
+	</script>
+</head>
+<body>
+<div>
+  <h1>家教系统注册</h1>
+  <div id="utility"> <a href="/">主页</a> | <a href="/login">登陆</a> | <a href="/register">用户注册</a> </div>
+</div>
+<div id='list'>
+	<form method='post'>
+		<table>
+			<tr><td>用户名</td><td><input name='username' type='text'></td></tr>
+			<tr><td>邮 箱</td><td><input name='email' type='text'></td></tr>
+			<tr><td>密 码</td><td><input type='password' id='first' name='password' type='text'></td></tr>
+			<tr><td>确认密码</td><td><input type='password' id='second' name='makesure' type='text'></td></tr>
+			<tr><td>接受 <input type="radio" name="get" value="true" />
+			不接受 <input type="radio" checked="checked" name="get" value="false" /></td></tr>
+			<tr><td><input type="submit" value="注册" onclick='check_password()'> <input type="reset" value="清空"></td></tr>
+		</table>
+	</form>
+</div>
+<br />
+<div id="bottom"> <img src="/static/images/kao_bottom.jpg" width="44" height="22" /> <a href="/AboutUs">About Us</a> | <a href="/ContactUs">Contact Us</a> | &copy;2015 HuangFengLee </div>
+</body>
+</html>

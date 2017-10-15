@@ -1,0 +1,259 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<title>yinizhizhu | PythonRE</title>
+ <meta charset='utf-8'>
+<link rel="stylesheet" href="/static/css/github.css">
+<link rel="stylesheet" href="/static/css/post.css">
+</head>
+<body>
+
+<div class="wrapper">
+<div class="header">
+	<span class="blog-name">yinizhizhu</span>
+
+<a class="nav" href="/">Home</a>
+<a class="nav" href="/About">About</a>
+
+<span class='textwidget' id='nowDate'></span> <span id='nowTime'></span>
+<script>
+<!--
+var ns4up1 = (document.layers) ? 1 : 0;  // browser sniffer
+var ie4up1 = (document.all&&(navigator.appVersion.indexOf("MSIE 4") == -1)) ? 1 : 0;
+
+var ns6up1 = (document.getElementById&&!document.all) ? 1 : 0;
+
+function nowclock() {
+if (!ns4up1 && !ie4up1 && !ns6up1) return false;
+var digital = new Date();
+var hours = digital.getHours();
+var minutes = digital.getMinutes();
+var seconds = digital.getSeconds();
+var day = digital.getDate();
+var month = digital.getMonth() + 1;
+var year = digital.getYear() + 1900 ;
+var amOrPm = "AM";
+if (hours > 11) amOrPm = "PM";
+if (hours > 12) hours = hours - 12;
+if (hours == 0) hours = 12;
+if (minutes < 10) minutes = "0" + minutes;
+if (seconds < 10) seconds = "0" + seconds;
+if (day < 10) day = "0" + day;
+if (month < 10) month = "0" + month;
+dispTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
+dispDate = year + "年" + month + "月" + day+ "日, " ;
+if (ns4up1) {
+document.layers.nowTime.document.write(dispTime);
+document.layers.nowTime.document.close();
+document.layers.nowDate.document.write(dispDate);
+document.layers.nowDate.document.close();
+} else if (ns6up1){
+document.getElementById("nowTime").innerHTML = dispTime;
+document.getElementById("nowDate").innerHTML = dispDate;
+} else if (ie4up1){
+nowTime.innerHTML = dispTime;
+nowDate.innerHTML = dispDate;
+} setTimeout("nowclock()", 1000);
+} nowclock();
+//-->
+    </script>
+</div>
+<div class="content">
+
+<h1>字符串匹配方法正则表达式：RE</h1>
+
+<p>因为在自己在编写网络爬虫过程中，用到了正则表达式，感受到了它的优雅！为了方便用时能够记起一些重要的使用方式，所以，在此记下。</p>
+
+<p>详细介绍在这里：<a href='https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F' style='decoration:none;color:rgba(51, 132, 254, 1);'><b>正则表达式</b></a></p>
+
+<p>对于正则表达式（RE：Regular Expression），我们主要是了解它的：1.<a href='#jump_1' style='decoration:none;'><b>常用符号</b></a>、2.<a href='#jump_2' style='decoration:none;'><b>常用方法</b></a>、3.<a href='#jump_3' style='decoration:none;'><b>常用搭配</b></a></p>
+
+<p id='jump_1'><big>（一）RE的常用字符</big></p>
+
+<pre><code class="language-objective-c">.               <I>匹配任意字符，除了换行符‘\n’</I>
+*               <I>匹配前一个字符0次或无限次</I>
++               <I>匹配至少一次</I>
+?               <I>匹配前一个字符0次或1次</I>
+.*              <I>贪心算法（找到尽</I><b style='color:rgba(51, 132, 254, 1);'>可能长</b><I>的匹配串）</I>
+.*?             <I>非贪心算法（找到</I><b style='color:rgba(51, 132, 254, 1);'>尽量多</b><I>的匹配串）</I>
+()              <I>将匹配到的串返回括号内的部分</I> 
+^               <I>匹配行首</I>
+$               <I>匹配行尾</I>
+[a-zA-Z0-9]     <I>匹配大小写字母或数字</I>
+\d              <I>匹配数字，相当于[0-9]</I>
+\D              <I>行首匹配数字，相当于[^0-9]</I>
+\s              <I>匹配空白字符[\t\r\n\f\v]</I>
+\S              <I>匹配非空白字符</I>
+\w              <I>相当于[a-zA-Z0-9]</I>
+\W              <I>\w的反义</I>
+</code></pre>
+
+<p id='jump_2'><big>（二）RE的常用方法</big></p>
+
+<pre><code class="language-objective-c"><a href='#jump_find' style='decoration:none;color:rgba(51, 132, 254, 1);'>findall</a>         <I>匹配所有符合规律的内容，并将结果以列表返回</I>
+<a href='#jump_search' style='decoration:none;color:rgba(51, 132, 254, 1);'>search</a>          <I>匹配第一个符合规律，将对象group返回</I>
+<a href='#jump_match' style='decoration:none;color:rgba(51, 132, 254, 1);'>match</a>           <I>从开头开始匹配（一般很少用到）</I>
+<a href='#jump_sub' style='decoration:none;color:rgba(51, 132, 254, 1);'>sub</a>             <I>替换符合规律的内容，并返回替换后的值</I>
+</code></pre>
+
+<p id='jump_find'>我们先看<b style='color:rgba(51, 132, 254, 1);'>re.findall(pattern, string, flags=0)</b>方法</p>
+
+<pre><code class="language-objective-c">string_temp = 'ljlgjkXXIXXlkjglkjXXLoveXXkljlgjXXYouXXlkjlgj'
+
+model_1 ='XX.XX'
+model_2 = 'XX.?XX'
+model_3 = 'XX.*XX'
+model_4 = 'XX.*?XX'
+model_5 = 'XX(.*?)XX'
+
+result_1 = re.findall(model_1, string_temp)
+result_2 = re.findall(model_2, string_temp)
+result_3 = re.findall(model_3, string_temp)
+result_4 = re.findall(model_4, string_temp)
+result_5 = re.findall(model_5, string_temp)
+</code></pre>
+
+<p>如何将result_1~result_5进行输出，我们将看到</p>
+
+<pre><code class="language-objective-c">>>> result_1
+['XXIXX']
+>>> result_2
+['XXIXX']
+>>> result_3
+['XXIXXlkjglkjXXLoveXXkljlgjXXYouXX']
+>>> result_4
+['XXIXX', 'XXLoveXX', 'XXYouXX']
+>>> result_5
+['I', 'Love', 'You']
+</code></pre>
+
+<p>我们用的较多的主要是‘.*’和‘.*?’。我们可以通过比较result_3和result_4的输出，不难看出：‘.*’是匹配到所能匹配到的尽量长的字符，而‘.*?’则是匹配所能匹配到的尽量多的字符。</p>
+
+<p>另外，re.findall()可以接受三个参数，第三个参数是修改findall()内部的一些匹配操作。常有re.S(正常的匹配都是以换行符进行切割，然后进行匹配。忽略换行符，进行全局匹配)、re.I(忽略大小写)，当然还有其它的一些：re.L、re.M、re.X、re.X，这些大家可以在需要的时候再去了解既可以。</p>
+
+<pre><code class="language-objective-c">>> result_10 = re.search('XXX.XXX', string_temp)
+>>> result_10
+>>> print result_10
+None
+>>>
+>>> temp = 'wearetheone-\n-wearethechildren'
+>>> temp
+'wearetheone-\n-wearethechildren'
+>>> model = '-.*-'
+>>> result = re.findall(model, temp)
+>>> result
+[]
+>>> result = re.findall(model, temp, re.S)
+>>> result
+['-\n-']
+>>>
+</code></pre>
+
+<p>在上述用例中，‘\n’是换行符。</p>
+
+<p>我们可以看到的是：在没有re.S时，是以‘\n’分界，所以没有匹配到我们需要的部分。当我们加上re.S这个参数后，就不再如此，而是整体都进行匹配，包括‘\n’。</p>
+
+<p id='jump_search'>我们再看<b style='color:rgba(51, 132, 254, 1);'>re.search(pattern, string, flags=0)</b>方法，并输出</p>
+
+<pre><code class="language-objective-c">result_11 = re.search(model_1, string_temp)
+result_12 = re.search(model_2, string_temp)
+result_13 = re.search(model_3, string_temp)
+result_14 = re.search(model_4, string_temp)
+result_15 = re.search(model_5, string_temp)
+result_10 = re.search('XXX.XXX', string_temp)
+>>> result_11
+<_sre.SRE_Match object at 0x026106E8>
+>>> result_12
+<_sre.SRE_Match object at 0x02610720>
+>>> result_13
+<_sre.SRE_Match object at 0x026108E0>
+>>> result_14
+<_sre.SRE_Match object at 0x02610918>
+>>> result_15
+<_sre.SRE_Match object at 0x02229360>
+>>> result_10
+>>> print result_10
+None
+>>>
+</code></pre>
+
+<p>如果匹配到将会返回一个对象，否则将会返回None。我们通过返回对象的group属性进行数据访问。</p>
+
+<p>如果要访问返回的对象中的单个字符串，就根据其位置进行获取：第i个位置，那么就使用result.group(i)进行访问(result是re.search()返回的对象)。</p>
+
+<p>re.group()没有参数，那么就默认为0，保存的是所有的匹配结果，正如下例输出的结果所示（‘-’符号是因为'\n'不可见所增加的提示符）。</p>
+
+<pre><code class="language-objective-c">>>> print result_11.group()
+XXIXX
+>>> print result_12.group()
+XXIXX
+>>> print result_13.group()
+XXIXXlkjglkjXXLoveXXkljlgjXXYouXX
+>>> print result_14.group()
+XXIXX
+>>> print result_15.group()
+XXIXX
+>>> model = '-(.*)-we(.*)the'
+>>> result = re.search(model, temp)
+>>> result
+>>> result = re.search(model, temp, re.S)
+>>> result
+<_sre.SRE_Match object at 0x01E1D8D8>
+>>> print result.group()
+-
+-wearethe
+>>> print result.group(1)
+
+>>> print result.group(2)
+are
+>>>
+</code></pre>
+
+<p>上述例子中，可以看到，re.search()方法和re.findall()方法一样，也可接受第三个参数，用途相同。</p>
+
+<p id='jump_match'><b style='color:rgba(51, 132, 254, 1);'>re.match(pattern, string, flags=0)</b>基本和re.search()相同，其差异就只是re.match()是从行首进行匹配。</p>
+
+<p id='jump_sub'>最后是<b style='color:rgba(51, 132, 254, 1);'>re.sub(pattern, repl, string, count=0)</b>方法：string如果从开始匹配（re.match()）到了pattern，再用repl来替换，count表示要替换的次数，不传参表示全部替换，返回的是替换过后的字符串。</p>
+
+<pre><code class="language-objective-c">>>> temp
+'wearetheone-\n-wearethechildren'
+>>> model
+'-(.*)-we(.*)the'
+>>> result = re.sub(model, '**', temp, 0)
+>>> result
+'wearetheone-\n-wearethechildren'
+>>> model = 'we(.*)the'
+>>> result = re.sub(model, '000', temp)
+>>> temp
+'wearetheone-\n-wearethechildren'
+>>> result
+'000one-\n-000children'
+>>> result = re.sub(model, '000', temp, 2)
+>>> result
+'000one-\n-000children'
+>>> temp
+'wearetheone-\n-wearethechildren'
+>>> result = re.sub(model, '000', temp, 1)
+>>> result
+'000one-\n-wearethechildren'
+>>>
+</code></pre>
+
+<p id='jump_3'><b>（三）常用搭配</b></p>
+
+<p>从以上的例中，不难看出：findall是用的最多的方法，而.*、.*?为核心的符号。所以，常用也主要围绕这三展开，根据需要使用其它的方法和符号即可。</p>
+
+<p>参考资料：</p>
+<ul style='color:rgba(51, 132, 254, 1);'>
+<li><a href="https://stackoverflow.com/questions/18798792/explaining-difference-between-automaticallyadjustsscrollviewinsets-extendedlayo">https://stackoverflow.com/questions/18798792/explaining-difference-between-automaticallyadjustsscrollviewinsets-extendedlayo</a></li>
+<li><a href="http://redth.codes/ios7-full-screen-layout/">http://redth.codes/ios7-full-screen-layout/</a></li>
+<li><a href="http://www.cnblogs.com/wdsunny/p/4556378.html">http://www.cnblogs.com/wdsunny/p/4556378.html</a></li>
+</ul>
+
+</div>
+</div>
+<script src="../static/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+
+</html>

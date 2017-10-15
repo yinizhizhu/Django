@@ -1,0 +1,19 @@
+{% load myfilter %}
+{% if content.subjects|get:0 == '1' %}
+	语、
+{% endif %}
+{% if content.subjects|get:2 == '1' %}
+	数、
+{% endif %}
+{% if content.subjects|get:4 == '1' %}
+	英、
+{% endif %}
+{% if content.subjects|get:6 == '1' %}
+	物、
+{% endif %}
+{% if content.subjects|get:8 == '1' %}
+	化、
+{% endif %}
+{% if content.subjects|get:10 == '1' %}
+	生、
+{% endif %}

@@ -1,0 +1,11 @@
+<tr>
+	<form method="get">
+	<td style="line-height:40px;"><a href='/info/?title={{book.title}}' style='text-decoration:none'>{{ book.title }}</a></td>
+	<td style="line-height:40px;">{{ book.isbn }}</td>
+	<td style="line-height:40px;">{{ book.author.name }}</td>
+	<td style="line-height:40px;">{{ book.publisher }}</td>
+	<td style="line-height:40px;">{{ book.publishdate }}</td>
+	<td style="line-height:40px;">{{ book.price }}</td>
+     <td><a href="/update/?title={{book.title}}" style='text-decoration:none;'>修改</a> | <a href='/delete/?isbn={{book.isbn}}' style='text-decoration:none;'>删除</a></td>
+	</form>
+</tr>

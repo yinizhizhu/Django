@@ -1,0 +1,208 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<title>HFL家教系统</title>
+<link rel="stylesheet" href="/static/css/emx_nav_left.css" type="text/css" />
+</head>
+<body onmousemove="closesubnav(event);">
+{% load myfilter %}
+{% include "header_teacher.html" %}
+<div id="pagecell1">
+  <img alt="" src="/static/images/tl_curve_white.gif" height="6" width="6" id="tl" /> <img alt="" src="/static/images/tr_curve_white.gif" height="6" width="6" id="tr" />
+  <div id="pageName">
+    <h2 style="font-size:x-large;">学生信息浏览</h2>
+  </div>
+  <div id="pageNav">
+    <div id="sectionLinks">
+	<a href="/lookthrough_teacher" style="color:black;">学 生浏览</a>
+	<a href="/newpublish_teacher"><small>教 师</small>发布</a>
+	<a href="/historypublish_teacher">历史<small>发 布</small></a>
+	<a href="/historyget_teacher">历史<small>家 教</small></a>
+	<a href="/praise_teacher"><small>已 获</small>评价</a>
+	<a href="/info_teacher">教师<small>信 息</small></a>
+	<a href="/search_teacher"><small>匹 配</small>查找</a>
+	</div>
+    <div id="advert" style='text-align:center;'> <img src="/static/images/adver.jpg" alt="" width="178" height="120" /><small><I>Tel: 0450-0000-0000</I></small></div>
+  </div>
+  <div id="content">
+    <div class="list">
+	<form>
+		<table class='table table-bordered'>
+		<tr>
+			<td width='100px'>姓名</td><td width='200px'>{{ student.name }}</td>
+		</tr>
+			<td>性别</td>
+			<td>
+			{% if student.sex %}
+			男
+			{% else %}
+			女
+			{% endif %}
+			</td>
+		</tr>
+			<td>在读年级</td><td>{{student.age}}</td>
+		</tr>
+			<td>文/理</td>
+			<td>
+			{% if content.wenli == True %}
+			理科
+			{% else %}
+			文科
+			{% endif %}
+			</td>
+		</tr>
+			<td>联系电话</td><td>{{student.tel}}</td>
+		</tr>
+			<td>邮箱</td><td>{{student.email}}</td>
+		</tr>
+			<td>家庭住址</td><td>{{student.address}}</td>
+		</tr>
+		<tr>
+		<td>需补科目</td>
+		{% if content.wenli == True %}
+			<td>{% include "subject_like_teacher.html" %}</td>
+		{% else %}
+			<td>{% include "subject_wenke_teacher.html" %}</td>
+		{% endif %}
+		</tr>
+		<tr style='font-size:small;'>
+			<td style='font-size:medium;'>上课时间</td>
+			<td><h4>周一：
+		{% if content.timerequest|get:0 == '1' %}
+			<b>上午</b><input type="checkbox" name="day1_mor" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:2 == '1' %}
+			<b>下午</b> <input type="checkbox" name="day1_aft" value="True"  checked='checked'/>	
+		{% endif %}
+		{% if content.timerequest|get:4 == '1' %}
+			<b>晚上</b> <input type="checkbox" name="day1_nig" value="True"  checked='checked'/>
+		{% endif %}
+			</h4>
+			</td>
+			<td width='200px'><h4>周二：
+		{% if content.timerequest|get:6 == '1' %}
+			<b>上午</b><input type="checkbox" name="day2_mor" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:8 == '1' %}
+			<b>下午</b> <input type="checkbox" name="day2_aft" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:10 == '1' %}
+			<b>晚上</b> <input type="checkbox" name="day2_nig" value="True"  checked='checked'/>
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周三：
+		{% if content.timerequest|get:12 == '1' %}
+			<b>上午</b><input type="checkbox" name="day3_mor" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:14 == '1' %}
+			<b>下午</b> <input type="checkbox" name="day3_aft" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:16 == '1' %}
+			<b>晚上</b> <input type="checkbox" name="day3_nig" value="True"  checked='checked'/>
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周四：
+		{% if content.timerequest|get:18 == '1' %}
+			<b>上午</b><input type="checkbox" name="day4_mor" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:20 == '1' %}
+			<b>下午</b> <input type="checkbox" name="day4_aft" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:22 == '1' %}
+			<b>晚上</b>  <input type="checkbox" name="day4_nig" value="True"  checked='checked'/>
+		{% endif %}
+			</h4>
+			</td>
+		<tr style='font-size:small;'>
+			<td>&nbsp;</td>
+			<td><h4>周五：
+		{% if content.timerequest|get:24 == '1' %}
+			<b>上午</b><input type="checkbox" name="day5_mor" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:26 == '1' %}
+			<b>下午</b> <input type="checkbox" name="day5_aft" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:28 == '1' %}
+			<b>晚上</b> <input type="checkbox" name="day5_nig" value="True"  checked='checked'/>
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周六：
+		{% if content.timerequest|get:30 == '1' %}
+			<b>上午</b><input type="checkbox" name="day6_mor" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:32 == '1' %}
+			<b>下午</b><input type="checkbox" name="day6_aft" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:34 == '1' %}
+			<b>晚上</b> <input type="checkbox" name="day6_nig" value="True"  checked='checked'/>
+		{% endif %}
+			</h4>
+			</td>
+			<td><h4>周日：
+		{% if content.timerequest|get:36 == '1' %}
+			<b>上午</b><input type="checkbox" name="day7_mor" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:38 == '1' %}
+			<b>下午</b><input type="checkbox" name="day7_aft" value="True"  checked='checked'/>
+		{% endif %}
+		{% if content.timerequest|get:40 == '1' %}
+			<b>晚上</b> <input type="checkbox" name="day7_nig" value="True"  checked='checked'/>
+		{% endif %}
+			</h4>
+			</td>
+		</tr>
+		<tr>
+			<td>提供薪酬<small>（每小时）</small></td><td><h4>
+			{% if content.costperhour == 1 %}
+			20~29
+			{% elif content.costperhour == 2 %}
+			30~39
+			{% elif content.costperhour == 3 %}
+			40~49
+			{% elif content.costperhour == 4 %}
+			50~100
+			{% else %}
+			100~
+			{% endif %}</h4></td>
+		</tr>
+		<tr>
+			<td>老师要求</td>
+			<td>
+			{% if content.sexrequest == 1 %}
+			男
+			{% elif content.sexrequest == 2%}
+			女
+			{% else %}
+			男、女均可
+			{% endif %}
+			</td>
+		</tr>
+		<tr>
+			<td>发布日期</td>
+			<td>{{content.publishdate}}</td>
+			{% if content.freestate == False %}
+			<td><a href='/getorder_teacher/?content_student_id={{ content.id }}' style='text-decoration:none;'>预约开讲</a></td>
+			{% else %}
+			<td><a href='#' style='text-decoration:none;'>已开课</a></td>
+			{% endif %}
+		</tr>
+		</table>
+	</form>
+    </div>
+  </div>
+  <div id="siteInfo"><img src="/static/images/kao_bottom.jpg" width="44" height="22" /> <a href="/AboutUs">About Us</a> | <a href="/ContactUs">Contact Us</a> | &copy;2015 HuangFengLee </div>
+</div>
+<br />
+</body>
+</html>

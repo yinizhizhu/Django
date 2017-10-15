@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	
+<title>HFL家教系统</title>
+<link rel="stylesheet" href="/static/css/emx_nav_left.css" type="text/css" />
+</head>
+<body onmousemove="closesubnav(event);">
+{% load myfilter %}
+{% include "header_student.html" %}
+<div id="pagecell1">
+  <img alt="" src="/static/images/tl_curve_white.gif" height="6" width="6" id="tl" /> <img alt="" src="/static/images/tr_curve_white.gif" height="6" width="6" id="tr" />
+  <div id="pageName">
+    <h2 style="font-size:x-large;">学生信息发布</h2>
+  </div>
+  <div id="pageNav">
+    <div id="sectionLinks">
+	<a href="/lookthrough_student"><small>老 师</small>浏览</a>
+	<a href="/newpublish_student" style="color:black;">学 生发布</a>
+	<a href="/historypublish_student">历史<small>发 布</small></a>
+	<a href="/historyget_student">历史<small>老 师</small></a>
+	<a href="/praise_one_student"><small>完 成</small>评价</a>
+	<a href="/search_student"><small>匹 配</small>查找</a>
+	</div>
+    <div id="advert" style='text-align:center;'> <img src="/static/images/adver.jpg" alt="" width="178" height="120" /><small><I>Tel: 0450-0000-0000</I></small></div>
+  </div>
+  <div id="content">
+    <div class="list">
+	<form method='post'>
+		<table class='table table-bordered'>
+		<tr>
+			<td>序号</td><td>姓名</td><td>性别</td><td>年龄</td>
+		</tr>
+		{% for student in students_list %}
+			<tr>
+			<td>{{ forloop.counter }}{{ item }}</td>
+			<td><a href='/newpublishone_student/?student_id={{student.id}}'>{{student.name}}</a></td>
+			{% if student.sex %}
+			<td>男</td>
+			{% else %}
+			<td>女</td>
+			{% endif %}
+			<td>{{student.age}}</td>
+			</tr>
+		{% endfor %}
+		<tr style='background-color:gray;'>
+			<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td style='text-align:center;'><a href='/add_student' style='text-decoration:none;'>添加</a></td>
+		</tr>
+		</table>
+	</form>
+    </div>
+  </div>
+  <div id="siteInfo"><img src="/static/images/kao_bottom.jpg" width="44" height="22" /> <a href="/AboutUs">About Us</a> | <a href="/ContactUs">Contact Us</a> | &copy;2015 HuangFengLee </div>
+</div>
+<br />
+</body>
+</html>
